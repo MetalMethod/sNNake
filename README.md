@@ -1,1 +1,3 @@
 # sNNake
+
+Python game
