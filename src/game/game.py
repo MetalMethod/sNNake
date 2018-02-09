@@ -10,8 +10,8 @@ from player import Player
 #constants
 WINDOW_SIZE = width, height = 400, 400
 CENTER =  WINDOW_SIZE[0] / 2
-speed = [2, 2]
-grid_cell_size = 20
+GRID_CELL_SIZE = 20
+TIME_DELAY = 20
 
 # set up the colors
 BLACK = (  30,  30,  30)
@@ -22,24 +22,23 @@ BLUE  = (  0,   0, 100)
 
 #setup
 pygame.init()
-clock = pygame.time.Clock()
-
 screen = pygame.display.set_mode(WINDOW_SIZE)
+clock = pygame.time.Clock()
 
 #instantiate the player controller object
 controller = Controller()
   
-#instantiate the player
+#instantiate the player(initial_x, initial_y, speed)
 head = Player(CENTER, CENTER, 10)
 
-def draw_player(head):
-    pygame.draw.rect(screen, WHITE, (head.x,head.y, grid_cell_size, grid_cell_size))
+def draw_player(player):
+    pygame.draw.rect(screen, WHITE, (player.x, player.y, GRID_CELL_SIZE, GRID_CELL_SIZE))
     return
 
 #game loop
 while 1:
     #msElapsed = clock.tick(30)
-    pygame.time.delay(20)
+    pygame.time.delay(TIME_DELAY)
 
     #game loop exit condition
     for event in pygame.event.get():

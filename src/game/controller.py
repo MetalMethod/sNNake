@@ -12,16 +12,15 @@ class Controller:
         if( pygame.key.get_pressed()[pygame.K_LEFT] == 1 ):
             return 4
 
-
-    def update_player(self, head):
-        head.checkLimits()
+    def update_player(self, player):
+        player.checkLimits()
 
         if (self.detect_keyboard() == 1):
-            head.up()
+            player.up()
         if (self.detect_keyboard() == 2):
-            head.right()
+            player.right()
         if (self.detect_keyboard() == 3):
-            head.down()
+            player.down()
         if (self.detect_keyboard() == 4):
-            head.left()
+            player.left()
         return

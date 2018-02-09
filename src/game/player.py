@@ -5,7 +5,6 @@ class Player:
         self.speed = speed
         self.direction = 2
 
-
     def up(self):
         self.y = self.y - self.speed
         return
