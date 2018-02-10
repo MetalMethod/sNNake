@@ -29,26 +29,23 @@ clock = pygame.time.Clock()
 controller = Controller()
   
 #instantiate the player(initial_x, initial_y, speed)
-head = Player(CENTER, CENTER, 10)
-
-def draw_player(player):
-    pygame.draw.rect(screen, WHITE, (player.x, player.y, GRID_CELL_SIZE, GRID_CELL_SIZE))
-    return
+head = Player(CENTER, CENTER, 10, 1)
 
 #game loop
 while 1:
     #msElapsed = clock.tick(30)
     pygame.time.delay(TIME_DELAY)
 
-    #game loop exit condition
+    #game loop exit conditions
+    if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
-
+    
     # erase the screen
     screen.fill(BLACK)
 
     #draw objects
-    draw_player(head)
+    head.draw(pygame, screen, WHITE, GRID_CELL_SIZE)
     
     #update objects
     controller.update_player(head)

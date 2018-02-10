@@ -1,4 +1,4 @@
-class Player:
+class Cat:
     def __init__(self, x, y, speed, initial_direction):
         self.x = x
         self.y = y

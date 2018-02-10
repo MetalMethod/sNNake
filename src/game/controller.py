@@ -1,7 +1,7 @@
 import pygame
 
 class Controller:
-     
+        
     def detect_keyboard(self):
         if( pygame.key.get_pressed()[pygame.K_UP] == 1 ):
             return 1
