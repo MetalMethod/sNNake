@@ -1,5 +1,4 @@
 class Grid:
-
     def __init__(self, GRID_CELL_SIZE, color, pygame, screen):
         self.cell_size = GRID_CELL_SIZE
         self.rows = self.cell_size
@@ -14,4 +13,17 @@ class Grid:
                 rect = self.pygame.Rect(x * self.cell_size, y * self.cell_size, self.cell_size, self.cell_size)
                 self.pygame.draw.rect(self.screen, self.color, rect, 1)
 
-                #self.pygame.draw.rect(self.cell_size * self.cell_size, self.color, rect)
+    def get_grid_rows(self):
+        return self.rows
+
+class Position:
+    def __init__(self):
+        self.set_position(0, 0)
+        
+    def get_position(self):
+        return (self.x, self.y)
+
+    def set_position(self, x, y):
+        self.x = x
+        self.y = y
+        
