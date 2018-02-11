@@ -8,8 +8,9 @@ from controller import Controller
 from player import Player
 
 #constants
-WINDOW_SIZE = width, height = 400, 400
-CENTER =  WINDOW_SIZE[0] / 2
+MAP_SIZE = 400 
+WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
+CENTER =  MAP_SIZE / 2
 GRID_CELL_SIZE = 20
 TIME_DELAY = 20
 
@@ -28,8 +29,8 @@ clock = pygame.time.Clock()
 #instantiate the player controller object
 controller = Controller()
   
-#instantiate the player(initial_x, initial_y, speed)
-head = Player(CENTER, CENTER, 10, 1)
+#instantiate the player(initial_x, initial_y, speed, direction)
+head = Player(CENTER, CENTER, GRID_CELL_SIZE, 10)
 
 #game loop
 while 1:
@@ -45,10 +46,10 @@ while 1:
     screen.fill(BLACK)
 
     #draw objects
-    head.draw(pygame, screen, WHITE, GRID_CELL_SIZE)
+    head.draw(pygame, screen, WHITE)
     
     #update objects
-    controller.update_player(head)
+    controller.update_player(head, MAP_SIZE)
 
     #update all and close the loop
     pygame.display.update()
