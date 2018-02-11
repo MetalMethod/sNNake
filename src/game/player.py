@@ -13,6 +13,7 @@ class Player:
         self.direction = self.initial_direction()
         self.body_list = []
         self.eat()
+        self.eat()
         
 
     def draw(self, pygame, screen, color):
@@ -65,12 +66,20 @@ class Player:
     def eat(self):
         segment = Body(self.previous_position.x, self.previous_position.y, 20)
         self.body_list.append(segment)
+       # print(len(self.body_list)-1)
         print("eat")
 
     def update_body(self):
         for segment in self.body_list:
             segment.position.x = self.previous_position.x
             segment.position.y = self.previous_position.y
-            
+            segment.previous_position.x = segment.position.x
+            segment.previous_position.y = segment.position.y
+
         self.previous_position.x = self.position.x
         self.previous_position.y = self.position.y
+        
+    # def last_body_position(self):
+    # #     if (len(self.body_list) ):
+    #     self.body_list[len(self.body_list)].position = self.body_list[len(self.body_list)-1].previous_position
+    #     return
