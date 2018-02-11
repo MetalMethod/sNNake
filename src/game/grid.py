@@ -3,6 +3,8 @@ class Grid:
         self.cell_size = GRID_CELL_SIZE
         self.rows = self.cell_size
         self.columns = self.cell_size
+        self.center_x = (self.columns / 2)        
+        self.center_y = (self.rows / 2)
         self.color = color
         self.pygame = pygame
         self.screen = screen
@@ -15,7 +17,8 @@ class Grid:
 
     def get_grid_rows(self):
         return self.rows
-
+    
+            
 class Position:
     def __init__(self):
         self.set_position(0, 0)

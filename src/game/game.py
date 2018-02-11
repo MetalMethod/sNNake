@@ -14,7 +14,7 @@ MAP_SIZE = 400
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
 CENTER =  MAP_SIZE / 2
 GRID_CELL_SIZE = 20
-TIME_DELAY = 20
+TIME_DELAY = 30
 
 # set up the colors
 BLACK = (  30,  30,  30)
@@ -32,9 +32,9 @@ clock = pygame.time.Clock()
 #instantiate the player controller object
 controller = Controller()
   
-#instantiate the player(initial_x, initial_y, speed, direction)
+#instantiate the game objects
 grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
-head = Player(CENTER, CENTER, GRID_CELL_SIZE, 6)
+head = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE)
 food = Food(GRID_CELL_SIZE, MAP_SIZE)
 
 #game loop
@@ -57,7 +57,7 @@ while 1:
 
 
     #update objects
-    controller.update_player(head, MAP_SIZE)
+    controller.update_player(head, grid)
 
     #update all and close the loop
     pygame.display.update()

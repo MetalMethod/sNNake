@@ -9,12 +9,12 @@ class Food:
         self.initial_position()
 
     def draw(self, pygame, screen, color):
-        pygame.draw.rect(screen, color, (self.position.x, self.position.y, self.size, self.size))
-        self.screen = screen
+        pygame.draw.rect(screen, color, ((self.size * self.position.x +self.size/4), (self.size * self.position.y +self.size/4), self.size/2, self.size/2))
 
     def initial_position(self):
-        x = self.size * randint(0,self.size)
-        y = self.size * randint(0,self.size)
+        x = randint(0,self.size)
+        y = randint(0,self.size)
         self.position = Position()
         self.position.set_position(x, y)
+        print("food created at x: " + str(self.position.x) + " y: " + str(self.position.y))
         

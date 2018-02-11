@@ -13,12 +13,12 @@ class Controller:
             player.direction = 4
         return
 
-    def update_player(self, player, MAP_SIZE):
+    def update_player(self, player, grid):
         self.set_player_direction(player)
         player.move()
-        player.detect_walls(MAP_SIZE)
-        print(player.direction)
-
-        if(player.alive == False): print("DEAD")
+        player.detect_walls(grid)
+        
+        #print(player.direction)
+        #if(player.alive == False): print("DEAD")
 
 
