@@ -3,19 +3,18 @@ from grid import Position
 from body import Body
 
 class Player:
-    def __init__(self, x, y, size):
+    def __init__(self, x, y, size, BODY_LENGTH):
         self.position = Position()        
         self.position.x = x 
         self.position.y = y
         self.previous_position = Position()
         self.size = size
         self.alive = True
+        self.food = False
         self.direction = self.initial_direction()
         self.body_list = []
-        self.eat()
-        self.eat()
+        self.insert_body(BODY_LENGTH)
         
-
     def draw(self, pygame, screen, color):
         pygame.draw.rect(screen, color, (self.position.x * self.size, self.position.y * self.size, self.size, self.size))
        
@@ -64,22 +63,22 @@ class Player:
         return
             
     def eat(self):
-        segment = Body(self.previous_position.x, self.previous_position.y, 20)
-        self.body_list.append(segment)
-       # print(len(self.body_list)-1)
+        self.food = True    
+        #print(len(self.body_list)-1)
         print("eat")
 
     def update_body(self):
-        for segment in self.body_list:
-            segment.position.x = self.previous_position.x
-            segment.position.y = self.previous_position.y
-            segment.previous_position.x = segment.position.x
-            segment.previous_position.y = segment.position.y
+        self.insert_body(1)
 
-        self.previous_position.x = self.position.x
-        self.previous_position.y = self.position.y
-        
-    # def last_body_position(self):
-    # #     if (len(self.body_list) ):
-    #     self.body_list[len(self.body_list)].position = self.body_list[len(self.body_list)-1].previous_position
-    #     return
+        if(self.food == False):
+            self.body_list.pop()
+        else:
+            self.food = False
+
+
+    def insert_body(self, n):
+        for i in range(n):
+            segment = Body(self.position.x, self.position.y, 20)
+            self.body_list.insert(0, segment)
+    
+     

@@ -15,6 +15,7 @@ MAP_SIZE = 400
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
 GRID_CELL_SIZE = 20
 TIME_DELAY = 60
+BODY_LENGTH = 3
 
 # set up the colors
 BLACK = (  30,  30,  30)
@@ -34,7 +35,7 @@ controller = Controller()
   
 #instantiate the game objects
 grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
-player = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE)
+player = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
 food = Food(GRID_CELL_SIZE, grid.rows - 1, grid.columns - 1)
 
 #game loop
@@ -51,9 +52,12 @@ while 1:
     screen.fill(BLACK)
 
     #draw objects
-    player.draw(pygame, screen, WHITE)
+    #player.draw(pygame, screen, WHITE)
     food.draw(pygame, screen, WHITE)
-    player.body_list[0].draw(pygame, screen, WHITE)
+    #draw body
+    for el in player.body_list:
+        el.draw(pygame, screen, WHITE)
+    
     grid.draw()
 
 
