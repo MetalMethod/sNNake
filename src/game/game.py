@@ -5,6 +5,7 @@ import pygame
 
 #other classes from same folder
 from controller import Controller
+from grid import Grid
 from player import Player
 from food import Food
 
@@ -18,6 +19,7 @@ TIME_DELAY = 20
 # set up the colors
 BLACK = (  30,  30,  30)
 WHITE = (180, 180, 180)
+GREY  = ( 10,  10,  10)
 RED   = (180,   0,   0)
 GREEN = (  0, 100,   0)
 BLUE  = (  0,   0, 100)
@@ -31,6 +33,7 @@ clock = pygame.time.Clock()
 controller = Controller()
   
 #instantiate the player(initial_x, initial_y, speed, direction)
+grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
 head = Player(CENTER, CENTER, GRID_CELL_SIZE, 6)
 food = Food(GRID_CELL_SIZE, MAP_SIZE)
 
@@ -50,6 +53,8 @@ while 1:
     #draw objects
     head.draw(pygame, screen, WHITE)
     food.draw(pygame, screen, RED)
+    grid.draw()
+
 
     #update objects
     controller.update_player(head, MAP_SIZE)
