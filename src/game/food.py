@@ -13,9 +13,8 @@ class Food:
         pygame.draw.rect(screen, color, ((self.size * self.position.x +self.size/4), (self.size * self.position.y +self.size/4), self.size/2, self.size/2))
 
     def initial_position(self):
-        x = randint(1, self.grid_columns - 2)
-        y = randint(1, self.grid_rows - 2)
+        x = randint(1, self.grid_columns - 1)
+        y = randint(1, self.grid_rows - 1)
         self.position.set_position(x, y)
-        print(self.grid_columns, self.grid_rows)
         print("food spawned at x: " + str(self.position.x) + " y: " + str(self.position.y))
         

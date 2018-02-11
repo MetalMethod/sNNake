@@ -12,7 +12,6 @@ from food import Food
 #constants
 MAP_SIZE = 400 
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
-CENTER =  MAP_SIZE / 2
 GRID_CELL_SIZE = 20
 TIME_DELAY = 60
 
@@ -35,7 +34,7 @@ controller = Controller()
 #instantiate the game objects
 grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
 head = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE)
-food = Food(GRID_CELL_SIZE, grid.rows, grid.columns)
+food = Food(GRID_CELL_SIZE, grid.rows - 1, grid.columns - 1)
 
 #game loop
 while 1:
