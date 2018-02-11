@@ -35,7 +35,7 @@ controller = Controller()
 #instantiate the game objects
 grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
 head = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE)
-food = Food(GRID_CELL_SIZE, MAP_SIZE)
+food = Food(GRID_CELL_SIZE, grid.rows, grid.columns)
 
 #game loop
 while 1:
