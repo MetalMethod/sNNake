@@ -23,8 +23,7 @@ class Grid:
                             
     def get_grid_rows(self):
         return self.rows
-    
-            
+                
 class Position:
     def __init__(self):
         self.set_position(0, 0)

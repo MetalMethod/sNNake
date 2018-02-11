@@ -22,14 +22,13 @@ class Controller:
         player.turn()
         player.detect_walls(grid)
         player.update_body()
-       # self.debug(player)
+        #self.debug(player)
         
     def debug(self, player):
         print("##########################")
         for el in player.body_list:
             print (el.position.get_position())
             
-
         #####print(len(player.body_list))
         
         ####print (player.body_list[0].info())

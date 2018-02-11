@@ -52,7 +52,6 @@ while 1:
     screen.fill(BLACK)
 
     #draw objects
-    #player.draw(pygame, screen, WHITE)
     food.draw(pygame, screen, WHITE)
     #draw body
     for el in player.body_list:
@@ -60,10 +59,10 @@ while 1:
     
     grid.draw()
 
-
     #update objects
     controller.update_player(player, grid)
-
+    food.detect_colision(player)
+    
     #update all and close the loop
     pygame.display.update()
 #close game loop

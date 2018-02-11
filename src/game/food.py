@@ -7,14 +7,18 @@ class Food:
         self.grid_rows = grid_rows
         self.grid_columns = grid_columns
         self.position = Position()
-        self.initial_position()
+        self.spawn()
 
     def draw(self, pygame, screen, color):
         pygame.draw.rect(screen, color, ((self.size * self.position.x +self.size/4), (self.size * self.position.y +self.size/4), self.size/2, self.size/2))
 
-    def initial_position(self):
+    def spawn(self):
         x = randint(1, self.grid_columns - 1)
         y = randint(1, self.grid_rows - 1)
         self.position.set_position(x, y)
         print("food spawned at x: " + str(self.position.x) + " y: " + str(self.position.y))
         
+    def detect_colision(self, player):
+        if(player.position.x == self.position.x and player.position.y == self.position.y):
+            self.spawn()
+            player.eat()
