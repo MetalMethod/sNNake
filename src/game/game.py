@@ -34,7 +34,7 @@ controller = Controller()
   
 #instantiate the game objects
 grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
-head = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE)
+player = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE)
 food = Food(GRID_CELL_SIZE, grid.rows - 1, grid.columns - 1)
 
 #game loop
@@ -51,13 +51,14 @@ while 1:
     screen.fill(BLACK)
 
     #draw objects
-    head.draw(pygame, screen, WHITE)
+    player.draw(pygame, screen, WHITE)
     food.draw(pygame, screen, WHITE)
+    player.body_list[0].draw(pygame, screen, WHITE)
     grid.draw()
 
 
     #update objects
-    controller.update_player(head, grid)
+    controller.update_player(player, grid)
 
     #update all and close the loop
     pygame.display.update()
