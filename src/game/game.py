@@ -14,7 +14,7 @@ MAP_SIZE = 400
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
 CENTER =  MAP_SIZE / 2
 GRID_CELL_SIZE = 20
-TIME_DELAY = 30
+TIME_DELAY = 60
 
 # set up the colors
 BLACK = (  30,  30,  30)
