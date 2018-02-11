@@ -19,6 +19,7 @@ class Controller:
         player.detect_walls(grid)
         
     def debug(self, player):
+        #print(player.position.get_position())
         #print(player.direction)
         #if(player.alive == False): print("DEAD")
         return

@@ -3,6 +3,7 @@
 import sys
 import pygame
 
+
 #other classes from same folder
 from controller import Controller
 from grid import Grid
@@ -51,7 +52,7 @@ while 1:
 
     #draw objects
     head.draw(pygame, screen, WHITE)
-    food.draw(pygame, screen, RED)
+    food.draw(pygame, screen, WHITE)
     grid.draw()
 
 
