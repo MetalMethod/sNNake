@@ -75,9 +75,8 @@ class Player:
         else:
             self.food = False
 
-
-    def insert_body(self, n):
-        for i in range(n):
+    def insert_body(self, number_of_segments):
+        for i in range(number_of_segments):
             segment = Body(self.position.x, self.position.y, 20)
             self.body_list.insert(0, segment)
     

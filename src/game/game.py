@@ -34,7 +34,7 @@ clock = pygame.time.Clock()
 controller = Controller()
   
 #instantiate the game objects
-grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen)
+grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen, MAP_SIZE)
 player = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
 food = Food(GRID_CELL_SIZE, grid.rows - 1, grid.columns - 1)
 
