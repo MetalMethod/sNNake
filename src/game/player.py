@@ -1,3 +1,5 @@
+from random import randint
+
 class Player:
     def __init__(self, x, y, size, speed):
         self.x = x
@@ -27,7 +29,7 @@ class Player:
         return
 
     def initial_direction(self):
-        return 1
+        return randint(1, 4)
 
     def detect_walls(self, MAP_SIZE):
         if(self.x > MAP_SIZE - self.size):
