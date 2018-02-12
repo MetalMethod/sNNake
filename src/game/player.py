@@ -7,7 +7,6 @@ class Player:
         self.position = Position()        
         self.position.x = x 
         self.position.y = y
-        self.previous_position = Position()
         self.size = size
         self.alive = True
         self.food = False
