@@ -64,9 +64,7 @@ class Player:
             
     def eat(self):
         self.food = True    
-        #print(len(self.body_list)-1)
-        print("eat")
-
+        
     def update_body(self):
         self.insert_body(1)
 
