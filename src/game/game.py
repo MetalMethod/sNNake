@@ -27,6 +27,11 @@ BLUE  = (  0,   0, 100)
 
 #setup
 pygame.init()
+pygame.display.set_caption('sNNake')
+
+icon = pygame.Surface((32,32))
+pygame.display.set_icon(icon)
+
 screen = pygame.display.set_mode(WINDOW_SIZE)
 clock = pygame.time.Clock()
 
