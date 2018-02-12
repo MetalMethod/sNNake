@@ -1,8 +1,8 @@
-###### first sketch of sNNake
+###### sNNake by metalMethod (github.com/metalMethod)
+
 #dependencies
 import sys
 import pygame
-
 
 #other classes from same folder
 from controller import Controller
