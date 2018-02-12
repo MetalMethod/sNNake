@@ -5,10 +5,10 @@ import sys
 import pygame
 
 #other classes from same folder
-from controller import Controller
-from grid import Grid
-from player import Player
-from food import Food
+from game.controller import Controller
+from game.grid import Grid
+from game.player import Player
+from game.food import Food
 
 #constants
 MAP_SIZE = 400 
@@ -25,49 +25,51 @@ RED   = (180,   0,   0)
 GREEN = (  0, 100,   0)
 BLUE  = (  0,   0, 100)
 
-#setup
-pygame.init()
-pygame.display.set_caption('sNNake')
+class Game:
+    def __init__(self):
+        #setup
+        pygame.init()
+        pygame.display.set_caption('sNNake')
+        self.icon = pygame.Surface((32,32))
+        pygame.display.set_icon(self.icon)
+        self.screen = pygame.display.set_mode(WINDOW_SIZE)
+        self.clock = pygame.time.Clock()
 
-icon = pygame.Surface((32,32))
-pygame.display.set_icon(icon)
+        #instantiate the player controller object
+        self.controller = Controller()
+       
+        #instantiate the game objects
+        self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
+        self.player = Player(self.grid.center_x, self.grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
+        self.food = Food(GRID_CELL_SIZE, self.grid.rows - 1, self.grid.columns - 1)
 
-screen = pygame.display.set_mode(WINDOW_SIZE)
-clock = pygame.time.Clock()
 
-#instantiate the player controller object
-controller = Controller()
-  
-#instantiate the game objects
-grid = Grid(GRID_CELL_SIZE, GREY, pygame, screen, MAP_SIZE)
-player = Player(grid.center_x, grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
-food = Food(GRID_CELL_SIZE, grid.rows - 1, grid.columns - 1)
+    def start(self):
+        #game loop
+        while 1:
+            #msElapsed = clock.tick(30)
+            pygame.time.delay(TIME_DELAY)
 
-#game loop
-while 1:
-    #msElapsed = clock.tick(30)
-    pygame.time.delay(TIME_DELAY)
+            #game loop exit conditions
+            if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: sys.exit()
+            
+            # erase the screen
+            self.screen.fill(BLACK)
 
-    #game loop exit conditions
-    if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-    
-    # erase the screen
-    screen.fill(BLACK)
+            #draw objects
+            self.food.draw(pygame, self.screen, WHITE)
+            #draw body
+            for el in self.player.body_list:
+                el.draw(pygame, self.screen, WHITE)
+            
+            self.grid.draw()
 
-    #draw objects
-    food.draw(pygame, screen, WHITE)
-    #draw body
-    for el in player.body_list:
-        el.draw(pygame, screen, WHITE)
-    
-    grid.draw()
-
-    #update objects
-    controller.update_player(player, grid)
-    food.detect_colision(player)
-    
-    #update all and close the loop
-    pygame.display.update()
-#close game loop
+            #update objects
+            self.controller.update_player(self.player, self.grid)
+            self.food.detect_colision(self.player)
+            
+            #update all and close the loop
+            pygame.display.update()
+        #close game loop

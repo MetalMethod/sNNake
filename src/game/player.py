@@ -1,6 +1,6 @@
 from random import randint
-from grid import Position
-from body import Body
+from game.grid import Position
+from game.body import Body
 
 class Player:
     def __init__(self, x, y, size, BODY_LENGTH):
