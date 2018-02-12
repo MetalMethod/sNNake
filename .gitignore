@@ -123,6 +123,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Windows batch files
+*.bat
+
 #VScode
 .vscode/
 
