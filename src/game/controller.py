@@ -2,7 +2,7 @@ import pygame
 
 class Controller:
     
-    def set_player_direction(self, player):
+    def detect_keyboard(self, player):
         if (pygame.key.get_pressed()[pygame.K_UP] == 1):
             self.up(player)
         if (pygame.key.get_pressed()[pygame.K_RIGHT] == 1):
@@ -14,10 +14,9 @@ class Controller:
         if (pygame.key.get_pressed()[pygame.K_1] == 1):
             player.eat()
     
-    def update_player(self, player, grid):
-        self.set_player_direction(player)
+    def update_player(self, player):
+        self.detect_keyboard(player)
         player.turn()
-        player.detect_walls(grid)
         player.update_body()
         #self.debug(player)
 

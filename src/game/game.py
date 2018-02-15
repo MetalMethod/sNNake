@@ -38,8 +38,7 @@ class Game:
         self.game_count = 1
         self.max_games = max_games
         self.main_loop()
-        
-
+       
     def init_game_objects(self):   
         #instantiate the game objects
         self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
@@ -49,6 +48,10 @@ class Game:
     def game_status(self):
         print("##### GAME START ##### game count: ", self.game_count)
 
+    def set_step_output(self):
+        self.step_output = [self.player.position.x, self.player.position.y, self.food.position.x, self.food.position.y]
+        print(self.step_output)
+        
     def main_loop(self):
         while (self.game_count <= self.max_games):
             self.game_status()
@@ -80,15 +83,17 @@ class Game:
             
             self.grid.draw()
 
+            ####### STEP
+            self.set_step_output()
+            #######
+
             #update objects
-            self.controller.update_player(self.player, self.grid)
+            self.player.detect_walls(self.grid)
+            self.controller.update_player(self.player)
             if(self.food.detect_colision(self.player)):
                 self.score = self.score + 1
                 print("score: ", self.score)
             
-            #check if game is over
-            #if(self.player.alive == False):
-
             #update all and close the loop
             pygame.display.update()
         #close game loop
