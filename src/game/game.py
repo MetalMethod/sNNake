@@ -38,6 +38,7 @@ class Game:
         self.game_count = 1
         self.max_games = max_games
         self.main_loop()
+        
 
     def init_game_objects(self):   
         #instantiate the game objects
@@ -46,12 +47,13 @@ class Game:
         self.food = Food(GRID_CELL_SIZE, self.grid.rows - 1, self.grid.columns - 1)
 
     def game_status(self):
-        print("game count: ", self.game_count)
+        print("##### GAME START ##### game count: ", self.game_count)
 
     def main_loop(self):
         while (self.game_count <= self.max_games):
             self.game_status()
             self.init_game_objects()
+            self.score = 0
             self.game_loop()
             self.game_count = self.game_count + 1
 
@@ -80,7 +82,9 @@ class Game:
 
             #update objects
             self.controller.update_player(self.player, self.grid)
-            self.food.detect_colision(self.player)
+            if(self.food.detect_colision(self.player)):
+                self.score = self.score + 1
+                print("score: ", self.score)
             
             #check if game is over
             #if(self.player.alive == False):

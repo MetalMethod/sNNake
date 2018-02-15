@@ -16,9 +16,13 @@ class Food:
         x = randint(1, self.grid_columns - 1)
         y = randint(1, self.grid_rows - 1)
         self.position.set_position(x, y)
-        print("food spawned at x: " + str(self.position.x) + " y: " + str(self.position.y))
         
     def detect_colision(self, player):
         if(player.position.x == self.position.x and player.position.y == self.position.y):
             self.spawn()
             player.eat()
+            return True
+
+    def debug(self):
+        print("food spawned at x: " + str(self.position.x) + " y: " + str(self.position.y))
+        
