@@ -26,7 +26,7 @@ GREEN = (  0, 100,   0)
 BLUE  = (  0,   0, 100)
 
 class Game:
-    def __init__(self):
+    def __init__(self, max_games):
         #setup
         pygame.init()
         pygame.display.set_caption('sNNake')
@@ -34,23 +34,35 @@ class Game:
         pygame.display.set_icon(self.icon)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.clock = pygame.time.Clock()
-
-        #instantiate the player controller object
         self.controller = Controller()
-       
+        self.game_count = 1
+        self.max_games = max_games
+        self.main_loop()
+
+    def init_game_objects(self):   
         #instantiate the game objects
         self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
         self.player = Player(self.grid.center_x, self.grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
         self.food = Food(GRID_CELL_SIZE, self.grid.rows - 1, self.grid.columns - 1)
 
+    def game_status(self):
+        print("game count: ", self.game_count)
 
-    def start(self):
+    def main_loop(self):
+        while (self.game_count <= self.max_games):
+            self.game_status()
+            self.init_game_objects()
+            self.game_loop()
+            self.game_count = self.game_count + 1
+
+    def game_loop(self):
         #game loop
-        while 1:
+        while self.player.alive:
             #msElapsed = clock.tick(30)
             pygame.time.delay(TIME_DELAY)
 
             #game loop exit conditions
+            if(pygame.key.get_pressed()[pygame.K_RETURN] == 1): break
             if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: sys.exit()
@@ -70,6 +82,9 @@ class Game:
             self.controller.update_player(self.player, self.grid)
             self.food.detect_colision(self.player)
             
+            #check if game is over
+            #if(self.player.alive == False):
+
             #update all and close the loop
             pygame.display.update()
         #close game loop

@@ -1,4 +1,4 @@
 from game.game import Game
 
-g = Game()
-g.start()
+#instantiate a game and pass the number of max games
+g = Game(3)
