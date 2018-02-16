@@ -48,10 +48,15 @@ class Game:
     def game_status(self):
         print("##### GAME START ##### game count: ", self.game_count)
 
-    def set_step_output(self):
-        self.step_output = [self.player.position.x, self.player.position.y, self.food.position.x, self.food.position.y]
-        print(self.step_output)
-        
+    ######## STEP
+    # def set_step_output(self):
+    #     self.step_output = [self.player.position.x, self.player.position.y, self.food.position.x, self.food.position.y]
+    #     print(self.step_output)
+
+    # def set_step_intput(self, input_value):
+    #     self.controller.input_api(self.player, input_value)
+    ######## STEP     
+    
     def main_loop(self):
         while (self.game_count <= self.max_games):
             self.game_status()
@@ -84,8 +89,9 @@ class Game:
             self.grid.draw()
 
             ####### STEP
-            self.set_step_output()
-            #######
+            # self.set_step_output()
+            # self.set_step_intput()
+            # #######
 
             #update objects
             self.player.detect_walls(self.grid)

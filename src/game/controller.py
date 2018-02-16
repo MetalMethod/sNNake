@@ -20,6 +20,16 @@ class Controller:
         player.update_body()
         #self.debug(player)
 
+    # def input_api(self, player, input_value):
+    #     if (input_value == 1)
+    #         self.up(player)
+    #     if (input_value == 2)
+    #         self.right(player)
+    #     if (input_value == 3)
+    #         self.down(player)
+    #     if (input_value == 4)
+    #         self.left(player)
+    
     def up(self, player):
         if (player.direction != 3) : player.direction = 1
 
@@ -37,12 +47,5 @@ class Controller:
         print("##########################")
         for el in player.body_list:
             print (el.position.get_position())
-            
-        #####print(len(player.body_list))
-        
-        ####print (player.body_list[0].info())
-        ####print(player.position.get_position())
-        ####print(player.direction)
-        ####if(player.alive == False): print("DEAD")
         return
 
