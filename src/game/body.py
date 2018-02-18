@@ -1,4 +1,4 @@
-from game.grid import Position
+from grid import Position
 
 class Body:
         def __init__(self, x, y, size):

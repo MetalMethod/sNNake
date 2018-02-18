@@ -1,23 +1,26 @@
 import pygame
 
 class Controller:
-    
-    def detect_keyboard(self, player):
+
+    def __init__(self, player):
+        self.player = player
+
+    def detect_keyboard(self):
         if (pygame.key.get_pressed()[pygame.K_UP] == 1):
-            self.up(player)
+            self.up()
         if (pygame.key.get_pressed()[pygame.K_RIGHT] == 1):
-            self.right(player)
+            self.right()
         if (pygame.key.get_pressed()[pygame.K_DOWN] == 1):
-            self.down(player)
+            self.down()
         if (pygame.key.get_pressed()[pygame.K_LEFT] == 1):
-            self.left(player)
+            self.left()
         if (pygame.key.get_pressed()[pygame.K_1] == 1):
             player.eat()
     
-    def update_player(self, player):
-        self.detect_keyboard(player)
-        player.turn()
-        player.update_body()
+    def update_player(self):
+        self.detect_keyboard()
+        self.player.turn()
+        self.player.update_body()
         #self.debug(player)
 
     # def input_api(self, player, input_value):
@@ -30,22 +33,21 @@ class Controller:
     #     if (input_value == 4)
     #         self.left(player)
     
-    def up(self, player):
-        if (player.direction != 3) : player.direction = 1
+    def up(self):
+        if (self.player.direction != 3) : self.player.direction = 1
 
-    def right(self, player):
-        if (player.direction != 4) : player.direction = 2
+    def right(self):
+        if (self.player.direction != 4) : self.player.direction = 2
 
-    def down(self, player):
-        if (player.direction != 1) : player.direction = 3
+    def down(self):
+        if (self.player.direction != 1) : self.player.direction = 3
 
-    def left(self, player):
-        if (player.direction != 2) : player.direction = 4
+    def left(self):
+        if (self.player.direction != 2) : self.player.direction = 4
 
-
-    def debug(self, player):
+    def debug(self):
         print("##########################")
-        for el in player.body_list:
+        for el in self.player.body_list:
             print (el.position.get_position())
         return
 

@@ -5,10 +5,10 @@ import sys
 import pygame
 
 #other classes from same folder
-from game.controller import Controller
-from game.grid import Grid
-from game.player import Player
-from game.food import Food
+from controller import Controller
+from grid import Grid
+from player import Player
+from food import Food
 
 #constants
 MAP_SIZE = 400 
@@ -34,16 +34,15 @@ class Game:
         pygame.display.set_icon(self.icon)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.clock = pygame.time.Clock()
-        self.controller = Controller()
         self.game_count = 1
         self.max_games = max_games
         self.main_loop()
        
     def init_game_objects(self):   
-        #instantiate the game objects
         self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
         self.player = Player(self.grid.center_x, self.grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
         self.food = Food(GRID_CELL_SIZE, self.grid.rows - 1, self.grid.columns - 1)
+        self.controller = Controller(self.player)
 
     def game_status(self):
         print("##### GAME START ##### game count: ", self.game_count)
@@ -96,7 +95,7 @@ class Game:
             #update objects
             self.player.detect_walls(self.grid)
             self.player.detect_body()
-            self.controller.update_player(self.player)
+            self.controller.update_player()
             if(self.food.detect_colision(self.player)):
                 self.score = self.score + 1
                 print("score: ", self.score)
@@ -104,3 +103,6 @@ class Game:
             #update all and close the loop
             pygame.display.update()
         #close game loop
+
+if __name__ == "__main__":
+    g = Game(3)

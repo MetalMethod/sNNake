@@ -1,5 +1,5 @@
 from random import randint
-from game.grid import Position
+from grid import Position
 class Food:
     def __init__(self, size, grid_rows, grid_columns):
         self.size = size

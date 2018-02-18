@@ -1,6 +1,6 @@
 from random import randint
-from game.grid import Position
-from game.body import Body
+from grid import Position
+from body import Body
 
 class Player:
     def __init__(self, x, y, size, BODY_LENGTH):
@@ -13,7 +13,10 @@ class Player:
         self.direction = self.initial_direction()
         self.body_list = []
         self.insert_body(BODY_LENGTH)
-        
+    
+    def initial_direction(self):
+        return randint(1, 4)
+    
     def draw(self, pygame, screen, color):
         pygame.draw.rect(screen, color, (self.position.x * self.size, self.position.y * self.size, self.size, self.size))
        
@@ -29,9 +32,6 @@ class Player:
     def left(self):
         self.position.x = self.position.x - 1
      
-    def initial_direction(self):
-        return randint(1, 4)
-
     def detect_walls(self, grid):
         if(self.position.x > grid.columns - 1):
             self.position.x = grid.columns - 1
@@ -82,5 +82,3 @@ class Player:
         for i in range(number_of_segments):
             segment = Body(self.position.x, self.position.y, 20)
             self.body_list.insert(0, segment)
-    
-     
