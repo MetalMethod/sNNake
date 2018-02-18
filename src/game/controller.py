@@ -22,16 +22,6 @@ class Controller:
         self.player.turn()
         self.player.update_body()
         #self.debug(player)
-
-    # def input_api(self, player, input_value):
-    #     if (input_value == 1)
-    #         self.up(player)
-    #     if (input_value == 2)
-    #         self.right(player)
-    #     if (input_value == 3)
-    #         self.down(player)
-    #     if (input_value == 4)
-    #         self.left(player)
     
     def up(self):
         if (self.player.direction != 3) : self.player.direction = 1
@@ -45,6 +35,17 @@ class Controller:
     def left(self):
         if (self.player.direction != 2) : self.player.direction = 4
 
+    # API input
+    def step(self, direction):
+        if(direction == 1):
+            self.up()
+        if(direction == 2):
+            self.right()
+        if(direction == 3):
+            self.down()
+        if(direction == 4):
+            self.left()
+    
     def debug(self):
         print("##########################")
         for el in self.player.body_list:
