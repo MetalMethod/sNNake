@@ -95,6 +95,7 @@ class Game:
 
             #update objects
             self.player.detect_walls(self.grid)
+            self.player.detect_body()
             self.controller.update_player(self.player)
             if(self.food.detect_colision(self.player)):
                 self.score = self.score + 1

@@ -50,6 +50,12 @@ class Player:
             self.alive = False
         return    
     
+    def detect_body(self):
+        for i in range (3, len(self.body_list)):
+            if(self.position.x == self.body_list[i].position.x and self.position.y == self.body_list[i].position.y):
+                self.alive = False
+                print("BODY HIT")
+
     def turn(self):
         if(self.direction == 1):
             self.up()
