@@ -5,6 +5,17 @@ class Controller:
     def __init__(self, player):
         self.player = player
 
+    # API input
+    def step(self, direction):
+        if(direction == 1):
+            self.up()
+        if(direction == 2):
+            self.right()
+        if(direction == 3):
+            self.down()
+        if(direction == 4):
+            self.left()
+    
     def detect_keyboard(self):
         if (pygame.key.get_pressed()[pygame.K_UP] == 1):
             self.up()
@@ -35,20 +46,8 @@ class Controller:
     def left(self):
         if (self.player.direction != 2) : self.player.direction = 4
 
-    # API input
-    def step(self, direction):
-        if(direction == 1):
-            self.up()
-        if(direction == 2):
-            self.right()
-        if(direction == 3):
-            self.down()
-        if(direction == 4):
-            self.left()
-    
     def debug(self):
         print("##########################")
         for el in self.player.body_list:
             print (el.position.get_position())
         return
-

@@ -5,10 +5,10 @@ import sys
 import pygame
 
 #other classes from same folder
-from controller import Controller
-from grid import Grid
-from player import Player
-from food import Food
+from game.controller import Controller
+from game.grid import Grid
+from game.player import Player
+from game.food import Food
 
 #constants
 MAP_SIZE = 400 
@@ -44,17 +44,11 @@ class Game:
         self.food = Food(GRID_CELL_SIZE, self.grid.rows - 1, self.grid.columns - 1)
         self.controller = Controller(self.player)
 
+    def observation(self):     
+        return self.player, self.food
+
     def game_status(self):
         print("##### GAME START ##### game count: ", self.game_count)
-
-    ######## STEP
-    # def set_step_output(self):
-    #     self.step_output = [self.player.position.x, self.player.position.y, self.food.position.x, self.food.position.y]
-    #     print(self.step_output)
-
-    # def set_step_intput(self, input_value):
-    #     self.controller.input_api(self.player, input_value)
-    ######## STEP     
     
     def main_loop(self):
         while (self.game_count <= self.max_games):
@@ -87,11 +81,6 @@ class Game:
             
             self.grid.draw()
 
-            ####### STEP
-            # self.set_step_output()
-            # self.set_step_intput()
-            # #######
-
             #update objects
             self.player.detect_walls(self.grid)
             self.player.detect_body()
@@ -104,5 +93,5 @@ class Game:
             pygame.display.update()
         #close game loop
 
-if __name__ == "__main__":
-    g = Game(3)
+# if __name__ == "__main__":
+#     g = Game(3)

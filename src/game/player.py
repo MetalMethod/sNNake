@@ -1,6 +1,6 @@
 from random import randint
-from grid import Position
-from body import Body
+from game.grid import Position
+#import Body
 
 class Player:
     def __init__(self, x, y, size, BODY_LENGTH):
@@ -82,3 +82,13 @@ class Player:
         for i in range(number_of_segments):
             segment = Body(self.position.x, self.position.y, 20)
             self.body_list.insert(0, segment)
+
+class Body:
+        def __init__(self, x, y, size):
+            self.position = Position()
+            self.position.x = x 
+            self.position.y = y
+            self.size = size
+            
+        def draw(self, pygame, screen, color):
+            pygame.draw.rect(screen, color, (self.position.x * self.size, self.position.y * self.size, self.size, self.size))
