@@ -27,7 +27,6 @@ BLUE  = (  0,   0, 100)
 
 class Game:
     def __init__(self, max_games):
-        #setup
         pygame.init()
         pygame.display.set_caption('sNNake')
         self.icon = pygame.Surface((32,32))
@@ -36,8 +35,16 @@ class Game:
         self.clock = pygame.time.Clock()
         self.game_count = 1
         self.max_games = max_games
-        self.main_loop()
+        #self.main_loop()
        
+    # def main_loop(self):
+    #     while (self.game_count <= self.max_games):
+    #         self.game_status()
+    #         self.init_game_objects()
+    #         self.score = 0
+    #         self.game_loop()
+    #         self.game_count = self.game_count + 1
+    
     def init_game_objects(self):   
         self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
         self.player = Player(self.grid.center_x, self.grid.center_y, GRID_CELL_SIZE, BODY_LENGTH)
@@ -49,15 +56,7 @@ class Game:
 
     def game_status(self):
         print("##### GAME START ##### game count: ", self.game_count)
-    
-    def main_loop(self):
-        while (self.game_count <= self.max_games):
-            self.game_status()
-            self.init_game_objects()
-            self.score = 0
-            self.game_loop()
-            self.game_count = self.game_count + 1
-
+      
     def game_loop(self):
         #game loop
         while self.player.alive:
@@ -92,6 +91,3 @@ class Game:
             #update all and close the loop
             pygame.display.update()
         #close game loop
-
-# if __name__ == "__main__":
-#     g = Game(3)
