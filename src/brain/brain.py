@@ -2,15 +2,13 @@ import sys
 sys.path.append('../') 
 from game.game import Game
 
+#constants
+GAMES = 3
+
 class Brain:
     def __init__(self):
-        self.GAMES = 3
-        self.game = Game(self.GAMES)
+        self.game = Game(GAMES)
         self.main_loop()
-        self.yo()
-
-    def yo(self):
-        print("yo")
 
     def main_loop(self):
         while (self.game.game_count <= self.game.max_games):
