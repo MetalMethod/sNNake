@@ -24,14 +24,3 @@ class Grid:
     def get_grid_rows(self):
         return self.rows
                 
-class Position:
-    def __init__(self):
-        self.set_position(0, 0)
-        
-    def get_position(self):
-        return (self.x, self.y)
-
-    def set_position(self, x, y):
-        self.x = x
-        self.y = y
-        

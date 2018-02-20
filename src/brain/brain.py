@@ -1,6 +1,15 @@
+# ANN DEPENDENCIES
+# import numpy as np
+# import matplotlib.pyplot as plt
+# import pandas as pd
+# import tensorflow as af
+# from sklearn.model_selection import train_test_split
+
+
 import sys
 sys.path.append('../') 
 from game.game import Game
+
 
 #constants
 GAMES = 3
@@ -17,7 +26,7 @@ class Brain:
             self.game.score = 0
             self.game.game_loop()
             self.game.game_count = self.game.game_count + 1
-            print(self.game.observation())
+            #print(self.game.observation())
 
 
 

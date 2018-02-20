@@ -1,12 +1,11 @@
 from random import randint
-from game.grid import Position
+
+import numpy as np
 #import Body
 
 class Player:
     def __init__(self, x, y, size, BODY_LENGTH):
-        self.position = Position()        
-        self.position.x = x 
-        self.position.y = y
+        self.position = [x, y]
         self.size = size
         self.alive = True
         self.food = False
@@ -18,41 +17,42 @@ class Player:
         return randint(1, 4)
     
     def draw(self, pygame, screen, color):
-        pygame.draw.rect(screen, color, (self.position.x * self.size, self.position.y * self.size, self.size, self.size))
-       
+        pygame.draw.rect(screen, color, (self.position[0] * self.size, self.position[1] * self.size, self.size, self.size))
+
+
     def up(self):
-        self.position.y = self.position.y - 1
+        self.position[1] = self.position[1] - 1
         
     def right(self):
-        self.position.x = self.position.x + 1
+        self.position[0] = self.position[0] + 1
                 
     def down(self):
-        self.position.y = self.position.y + 1
+        self.position[1] = self.position[1] + 1
      
     def left(self):
-        self.position.x = self.position.x - 1
+        self.position[0] = self.position[0] - 1
      
     def detect_walls(self, grid):
-        if(self.position.x > grid.columns - 1):
-            self.position.x = grid.columns - 1
+        if(self.position[0] > grid.columns - 1):
+            self.position[0] = grid.columns - 1
             self.alive = False
 
-        if(self.position.x < 0):
-            self.position.x = 0
+        if(self.position[0] < 0):
+            self.position[0] = 0
             self.alive = False
 
-        if(self.position.y > grid.rows - 1):
-            self.position.y = grid.rows - 1
+        if(self.position[1] > grid.rows - 1):
+            self.position[1] = grid.rows - 1
             self.alive = False
 
-        if(self.position.y < 0):
-            self.position.y = 0
+        if(self.position[1] < 0):
+            self.position[1] = 0
             self.alive = False
         return    
     
     def detect_body(self):
         for i in range (3, len(self.body_list)):
-            if(self.position.x == self.body_list[i].position.x and self.position.y == self.body_list[i].position.y):
+            if(self.position[0] == self.body_list[i].position[0] and self.position[1] == self.body_list[i].position[1]):
                 self.alive = False
                 print("BODY HIT")
 
@@ -80,15 +80,13 @@ class Player:
 
     def insert_body(self, number_of_segments):
         for i in range(number_of_segments):
-            segment = Body(self.position.x, self.position.y, 20)
+            segment = Body(self.position[0], self.position[1], 20)
             self.body_list.insert(0, segment)
 
 class Body:
         def __init__(self, x, y, size):
-            self.position = Position()
-            self.position.x = x 
-            self.position.y = y
+            self.position = [x, y]
             self.size = size
             
         def draw(self, pygame, screen, color):
-            pygame.draw.rect(screen, color, (self.position.x * self.size, self.position.y * self.size, self.size, self.size))
+            pygame.draw.rect(screen, color, (self.position[0] * self.size, self.position[1] * self.size, self.size, self.size))

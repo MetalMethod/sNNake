@@ -55,7 +55,8 @@ class Game:
         return self.player, self.food
 
     def game_status(self):
-        print("##### GAME START ##### game count: ", self.game_count)
+        #print("##### GAME START ##### game count: ", self.game_count)
+        return
       
     def game_loop(self):
         #game loop
@@ -86,7 +87,7 @@ class Game:
             self.controller.update_player()
             if(self.food.detect_colision(self.player)):
                 self.score = self.score + 1
-                print("score: ", self.score)
+        #        print("score: ", self.score)
             
             #update all and close the loop
             pygame.display.update()

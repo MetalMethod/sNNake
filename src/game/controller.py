@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 
 class Controller:
 
@@ -32,7 +33,7 @@ class Controller:
         self.detect_keyboard()
         self.player.turn()
         self.player.update_body()
-        #self.debug(player)
+        #self.debug()
     
     def up(self):
         if (self.player.direction != 3) : self.player.direction = 1
@@ -47,7 +48,8 @@ class Controller:
         if (self.player.direction != 2) : self.player.direction = 4
 
     def debug(self):
-        print("##########################")
-        for el in self.player.body_list:
-            print (el.position.get_position())
+        #print(self.player.position_vector)
+        # print("##########################")
+        # for el in self.player.body_list:
+        #     print (el.position.get_position())
         return
