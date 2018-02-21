@@ -27,13 +27,8 @@ class Controller:
         if (pygame.key.get_pressed()[pygame.K_LEFT] == 1):
             self.left()
         if (pygame.key.get_pressed()[pygame.K_1] == 1):
-            player.eat()
+            self.player.eat()
     
-    def update_player(self):
-        self.detect_keyboard()
-        self.player.turn()
-        self.player.update_body()
-        #self.debug()
     
     def up(self):
         if (self.player.direction != 3) : self.player.direction = 1

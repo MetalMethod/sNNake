@@ -61,9 +61,7 @@ class Game:
     def game_loop(self):
         #game loop
         while self.player.alive:
-            #msElapsed = clock.tick(30)
-            pygame.time.delay(TIME_DELAY)
-
+        
             #game loop exit conditions
             if(pygame.key.get_pressed()[pygame.K_RETURN] == 1): break
             if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
@@ -82,13 +80,16 @@ class Game:
             self.grid.draw()
 
             #update objects
-            self.player.detect_walls(self.grid)
-            self.player.detect_body()
-            self.controller.update_player()
+            self.controller.detect_keyboard()            
+            self.player.turn()
+            self.player.update_body()
+            self.player.check_isAlive(self.grid)    
+
             if(self.food.detect_colision(self.player)):
                 self.score = self.score + 1
-        #        print("score: ", self.score)
             
-            #update all and close the loop
-            pygame.display.update()
+            ### update all and close the loop
+            #msElapsed = clock.tick(30)
+            pygame.display.update()            
+            pygame.time.delay(TIME_DELAY)
         #close game loop

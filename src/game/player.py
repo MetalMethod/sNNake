@@ -19,7 +19,6 @@ class Player:
     def draw(self, pygame, screen, color):
         pygame.draw.rect(screen, color, (self.position[0] * self.size, self.position[1] * self.size, self.size, self.size))
 
-
     def up(self):
         self.position[1] = self.position[1] - 1
         
@@ -31,31 +30,7 @@ class Player:
      
     def left(self):
         self.position[0] = self.position[0] - 1
-     
-    def detect_walls(self, grid):
-        if(self.position[0] > grid.columns - 1):
-            self.position[0] = grid.columns - 1
-            self.alive = False
-
-        if(self.position[0] < 0):
-            self.position[0] = 0
-            self.alive = False
-
-        if(self.position[1] > grid.rows - 1):
-            self.position[1] = grid.rows - 1
-            self.alive = False
-
-        if(self.position[1] < 0):
-            self.position[1] = 0
-            self.alive = False
-        return    
     
-    def detect_body(self):
-        for i in range (3, len(self.body_list)):
-            if(self.position[0] == self.body_list[i].position[0] and self.position[1] == self.body_list[i].position[1]):
-                self.alive = False
-                print("BODY HIT")
-
     def turn(self):
         if(self.direction == 1):
             self.up()
@@ -67,6 +42,42 @@ class Player:
             self.left()
         return
             
+    def check_isAlive(self, grid):
+        if(self.detect_walls(grid, self.position)): 
+            self.alive = False
+            print("WALL HIT")
+        
+        if(self.detect_body(self.position)): 
+            self.alive = False
+            print("BODY HIT")
+        return
+     
+    def detect_walls(self, grid, position_array):
+        if(position_array[0] > grid.columns - 1):
+            return True
+
+        elif(position_array[0] < 0):
+            return True
+
+        elif(position_array[1] > grid.rows - 1):
+            return True
+
+        elif(position_array[1] < 0):
+            return True
+        else:
+            return False
+
+    def insert_body(self, number_of_segments):
+        for i in range(number_of_segments):
+            segment = Body(self.position[0], self.position[1], 20)
+            self.body_list.insert(0, segment)
+
+    def detect_body(self, position_array):
+        result = False
+        for i in range (3, len(self.body_list)):
+            if(position_array[0] == self.body_list[i].position[0] and position_array[1] == self.body_list[i].position[1]):
+                result = True
+        return result
     def eat(self):
         self.food = True    
         
@@ -77,11 +88,6 @@ class Player:
             self.body_list.pop()
         else:
             self.food = False
-
-    def insert_body(self, number_of_segments):
-        for i in range(number_of_segments):
-            segment = Body(self.position[0], self.position[1], 20)
-            self.body_list.insert(0, segment)
 
 class Body:
         def __init__(self, x, y, size):
