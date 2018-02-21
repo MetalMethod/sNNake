@@ -33,17 +33,17 @@ class Game:
         pygame.display.set_icon(self.icon)
         self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.clock = pygame.time.Clock()
-        self.game_count = 1
+        self.count = 1
         self.max_games = max_games
         #self.main_loop()
        
     # def main_loop(self):
-    #     while (self.game_count <= self.max_games):
+    #     while (self.count <= self.max_games):
     #         self.game_status()
     #         self.init_game_objects()
     #         self.score = 0
     #         self.game_loop()
-    #         self.game_count = self.game_count + 1
+    #         self.count = self.count + 1
     
     def init_game_objects(self):   
         self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
@@ -51,45 +51,57 @@ class Game:
         self.food = Food(GRID_CELL_SIZE, self.grid.rows - 1, self.grid.columns - 1)
         self.controller = Controller(self.player)
 
-    def observation(self):     
-        return self.player, self.food
+    def draw(self):
+        # erase the screen
+        self.screen.fill(BLACK)
+        #draw objects
+        self.food.draw(pygame, self.screen, WHITE)
+        #draw body
+        for el in self.player.body_list:
+            el.draw(pygame, self.screen, WHITE)
+        
+        self.grid.draw()
+
+    def exit_conditions(self):
+        if(pygame.key.get_pressed()[pygame.K_RETURN] == 1): return #break
+        if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+        
+    def finish_step(self):
+        ### update all and close the step
+        #msElapsed = clock.tick(30)
+        pygame.display.update()            
+        pygame.time.delay(TIME_DELAY)
+
+    def reset(self):
+        self.init_game_objects()
+        self.score = 0
 
     def game_status(self):
-        #print("##### GAME START ##### game count: ", self.game_count)
+        #print("##### GAME START ##### game count: ", self.count)
         return
-      
-    def game_loop(self):
-        #game loop
-        while self.player.alive:
-        
-            #game loop exit conditions
-            if(pygame.key.get_pressed()[pygame.K_RETURN] == 1): break
-            if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT: sys.exit()
-            
-            # erase the screen
-            self.screen.fill(BLACK)
 
-            #draw objects
-            self.food.draw(pygame, self.screen, WHITE)
-            #draw body
-            for el in self.player.body_list:
-                el.draw(pygame, self.screen, WHITE)
-            
-            self.grid.draw()
+    def update_objects(self):
+        self.controller.detect_keyboard()            
+        self.player.turn()
+        self.player.update_body()
+        self.player.check_isAlive(self.grid)      
+        if(self.food.detect_colision(self.player)):
+            self.score = self.score + 1
+    
+    def observation(self):     
+        return self.player, self.food
+    
+    def step(self):
+        self.exit_conditions()
+        self.draw()
+        self.update_objects()
 
-            #update objects
-            self.controller.detect_keyboard()            
-            self.player.turn()
-            self.player.update_body()
-            self.player.check_isAlive(self.grid)    
+        ### STEP OBSERVATION CODE
 
-            if(self.food.detect_colision(self.player)):
-                self.score = self.score + 1
-            
-            ### update all and close the loop
-            #msElapsed = clock.tick(30)
-            pygame.display.update()            
-            pygame.time.delay(TIME_DELAY)
-        #close game loop
+
+
+        ### update all and close the step
+        self.finish_step()
+
