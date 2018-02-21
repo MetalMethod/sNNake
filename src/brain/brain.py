@@ -20,13 +20,14 @@ GAMES_COUNT = 3
 #
 
 
-
+input = 0
 
 
 class Brain:
     def __init__(self):
         self.game = Game(GAMES_COUNT)
         self.main_loop()
+
 
     # main_loop is a pool of games for training
     def main_loop(self):
@@ -36,8 +37,12 @@ class Brain:
             
             # game loop
             while self.game.player.alive:
-                self.game.step()
+                
+                self.game.observation()
+                
+                self.game.step(input)
 
+            #end of game loop
 
             self.game.count = self.game.count + 1
             #print(self.game.observation())

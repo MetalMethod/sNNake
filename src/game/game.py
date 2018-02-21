@@ -1,4 +1,6 @@
 ###### sNNake by metalMethod (github.com/metalMethod)
+#
+#
 
 #dependencies
 import sys
@@ -84,13 +86,17 @@ class Game:
     def observation(self):     
         return self.player, self.food
     
-    def step(self):
+    # concept of step function from open ai: one step receaves a input and generates a observation.
+    #def step(self):
+    def step(self, input):
         self.exit_conditions()
         self.draw()
         self.update_objects()
+        #assign input data to a local variable
+        input = input
 
         ### STEP OBSERVATION CODE
-
+        
 
 
         ### update all and close the step
