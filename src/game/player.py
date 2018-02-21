@@ -2,12 +2,6 @@ from random import randint
 
 import numpy as np
 
-# TO DO:
-# add methods to detect if there is obstacles in left, forward or right, that return booleans
-#
-#
-
-
 class Player:
     def __init__(self, x, y, size, BODY_LENGTH):
         self.position = [x, y]

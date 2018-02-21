@@ -7,7 +7,7 @@ class Controller:
         self.player = player
 
     # API input
-    def step(self, direction):
+    def input(self, direction):
         if(direction == 1):
             self.up()
         if(direction == 2):
@@ -28,7 +28,6 @@ class Controller:
             self.left()
         if (pygame.key.get_pressed()[pygame.K_1] == 1):
             self.player.eat()
-    
     
     def up(self):
         if (self.player.direction != 3) : self.player.direction = 1

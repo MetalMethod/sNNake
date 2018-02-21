@@ -5,18 +5,27 @@
 # import tensorflow as af
 # from sklearn.model_selection import train_test_split
 
-
 import sys
 sys.path.append('../') 
 from game.game import Game
 
-
 #constants
-GAMES = 3
+GAMES_COUNT = 3
+
+
+
+# TO DO:
+# add methods to detect if there is obstacles in left, forward or right, that return booleans
+#
+#
+
+
+
+
 
 class Brain:
     def __init__(self):
-        self.game = Game(GAMES)
+        self.game = Game(GAMES_COUNT)
         self.main_loop()
 
     # main_loop is a pool of games for training

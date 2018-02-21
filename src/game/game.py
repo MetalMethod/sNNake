@@ -74,13 +74,12 @@ class Game:
         self.player.check_isAlive(self.grid)      
         if(self.food.detect_colision(self.player)):
             self.score = self.score + 1
-        
+
+    ### update pygame and close the step        
     def finish_step(self):
-        ### update all and close the step
         #msElapsed = clock.tick(30)
         pygame.display.update()            
         pygame.time.delay(TIME_DELAY)
-
 
     def observation(self):     
         return self.player, self.food
