@@ -44,13 +44,19 @@ class Player:
     def check_isAlive(self, grid):
         if(self.detect_walls(grid, self.position)): 
             self.alive = False
-            print("WALL HIT")
+            self.position = [10,10]
+            #print("WALL HIT")
         
         if(self.detect_body(self.position)): 
             self.alive = False
-            print("BODY HIT")
+            #print("BODY HIT")
         return
-     
+    
+    def insert_body(self, number_of_segments):
+        for i in range(number_of_segments):
+            segment = Body(self.position[0], self.position[1], 20)
+            self.body_list.insert(0, segment)
+
     def detect_walls(self, grid, position_array):
         if(position_array[0] > grid.columns - 1):
             return True
@@ -66,17 +72,13 @@ class Player:
         else:
             return False
 
-    def insert_body(self, number_of_segments):
-        for i in range(number_of_segments):
-            segment = Body(self.position[0], self.position[1], 20)
-            self.body_list.insert(0, segment)
-
     def detect_body(self, position_array):
         result = False
         for i in range (3, len(self.body_list)):
             if(position_array[0] == self.body_list[i].position[0] and position_array[1] == self.body_list[i].position[1]):
                 result = True
         return result
+    
     def eat(self):
         self.food = True    
         

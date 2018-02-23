@@ -37,6 +37,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.count = 1
         self.max_games = max_games
+        self.init_game_objects()
     
     def init_game_objects(self):   
         self.grid = Grid(GRID_CELL_SIZE, GREY, pygame, self.screen, MAP_SIZE)
@@ -92,11 +93,13 @@ class Game:
         self.exit_conditions()
         self.draw()
         self.update_objects()
-        #assign input data to a local variable
-        input = input
-
-        ### STEP OBSERVATION CODE
         
+        ### STEP OBSERVATION CODE
+
+        #sensors
+        # self.player.detect_obstacle_forward(self.grid)
+        # self.player.detect_obstacle_left(self.grid)
+        # self.player.detect_obstacle_right(self.grid)
 
 
         ### update all and close the step
