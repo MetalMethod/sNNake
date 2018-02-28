@@ -100,10 +100,11 @@ class Game:
     
     # concept of step function from open ai: one step receaves a input and generates a observation.
     #def step(self):
-    def step(self, sensors, input):
+    def step(self, sensors, direction):
         self.exit_conditions()
         self.draw()
         self.update_objects(sensors)
+        self.controller.input(direction)
         
         ### STEP OBSERVATION CODE
 
