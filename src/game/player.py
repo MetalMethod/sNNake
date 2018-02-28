@@ -26,7 +26,7 @@ class Player:
                 
     def down(self):
         self.position[1] = self.position[1] + 1
-     
+    
     def left(self):
         self.position[0] = self.position[0] - 1
     

@@ -17,7 +17,7 @@ MAP_SIZE = 400
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
 GRID_CELL_SIZE = 20
 TIME_DELAY = 60
-BODY_LENGTH = 3
+BODY_LENGTH = 4
 
 # set up the colors
 BLACK = (  30,  30,  30)
@@ -99,12 +99,11 @@ class Game:
         return self.player, self.food
     
     # concept of step function from open ai: one step receaves a input and generates a observation.
-    #def step(self):
-    def step(self, sensors, direction):
+    def step(self, sensors, action):
         self.exit_conditions()
         self.draw()
         self.update_objects(sensors)
-        self.controller.input(direction)
+        self.controller.input(action)
         
         ### STEP OBSERVATION CODE
 

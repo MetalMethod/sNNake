@@ -6,16 +6,35 @@ class Controller:
     def __init__(self, player):
         self.player = player
 
-    # API input
-    def input(self, direction):
-        if(direction == 1):
-            self.up()
-        if(direction == 2):
-            self.right()
-        if(direction == 3):
-            self.down()
-        if(direction == 4):
-            self.left()
+    ##### API input
+    # action is -1 turn left, 
+    # 0 do nothing and go forward 
+    # 1 is turn rightt
+    def input(self, action):
+        if(action == -1):
+            #turn left
+            if(self.player.direction == 1):
+                self.left()
+            if(self.player.direction == 2):
+                self.up()
+            if(self.player.direction == 3):
+                self.right()
+            if(self.player.direction == 4):
+                self.down()
+            return
+        if(action == 1):
+            #turn right
+            if(self.player.direction == 1):
+                self.right()
+            if(self.player.direction == 2):
+                self.down()
+            if(self.player.direction == 3):
+                self.left()
+            if(self.player.direction == 4):
+                self.up()
+            return
+        if(action == 0):
+            return
     
     def detect_keyboard(self):
         if (pygame.key.get_pressed()[pygame.K_UP] == 1):
