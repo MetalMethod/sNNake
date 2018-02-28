@@ -33,14 +33,14 @@ class Brain:
 
                 # give input to game
                 action = self.generate_action()
+                action = 0
                 self.game.step(self.sensors, action)
 
                 #evaluate reward
-                if(self.game.player.alive): 
-                    reward = 0
-                else:
-                    reward = -1
-
+                if(self.game.player.food): reward = 1
+                if(self.game.player.alive): reward = 0
+                else: reward = -1
+                
                 # get observation
                 observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), action, reward]
                 print(observation)
