@@ -20,6 +20,12 @@ class Brain:
     def generate_action(self):
         return randint(-1,1)
 
+    def get_reward(self):
+        if(self.game.player.alive): reward = 0
+        else: reward = -1
+        if(self.game.player.food): reward = 1
+        return reward
+
     # main_loop is a pool of games for training
     def main_loop(self):
         while (self.game.count <= self.game.max_games):
@@ -37,10 +43,7 @@ class Brain:
                 self.game.step(self.sensors, action)
 
                 #evaluate reward
-                if(self.game.player.food): reward = 1
-                if(self.game.player.alive): reward = 0
-                else: reward = -1
-                
+                reward = self.get_reward()
                 # get observation
                 observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), action, reward]
                 print(observation)
