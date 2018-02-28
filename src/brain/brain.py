@@ -1,9 +1,3 @@
-# ANN DEPENDENCIES
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import pandas as pd
-# import tensorflow as af
-# from sklearn.model_selection import train_test_split
 
 import sys
 sys.path.append('../') 
@@ -39,7 +33,7 @@ class Brain:
 
 
                 # give input
-                self.game.step(input)
+                self.game.step(self.sensors, input)
 
 
             #end of game loop

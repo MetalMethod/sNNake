@@ -2,7 +2,7 @@
 Igor Busquets LML
 """
 
-#Artifficial Neural Networks
+# Artifficial Neural Networks
 
 # DEPENDENCIES
 import numpy as np

@@ -65,16 +65,27 @@ class Game:
         if(pygame.key.get_pressed()[pygame.K_ESCAPE] == 1): sys.exit()
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
+             
+    def check_isAlive(self, sensors):
+        if(sensors.detect_walls(self.grid, self.player.position)): 
+            self.player.alive = False
+            self.player.position = [10,10]
+            #print("WALL HIT")
         
+        if(sensors.detect_body(self.player.position)): 
+            self.player.alive = False
+            #print("BODY HIT")
+        return
+
     def reset(self):
         self.init_game_objects()
         self.score = 0
 
-    def update_objects(self):
+    def update_objects(self, sensors):
         self.controller.detect_keyboard()            
         self.player.turn()
         self.player.update_body()
-        self.player.check_isAlive(self.grid)      
+        self.check_isAlive(sensors)      
         if(self.food.detect_colision(self.player)):
             self.score = self.score + 1
 
@@ -89,17 +100,12 @@ class Game:
     
     # concept of step function from open ai: one step receaves a input and generates a observation.
     #def step(self):
-    def step(self, input):
+    def step(self, sensors, input):
         self.exit_conditions()
         self.draw()
-        self.update_objects()
+        self.update_objects(sensors)
         
         ### STEP OBSERVATION CODE
-
-        #sensors
-        # self.player.detect_obstacle_forward(self.grid)
-        # self.player.detect_obstacle_left(self.grid)
-        # self.player.detect_obstacle_right(self.grid)
 
 
         ### update all and close the step
