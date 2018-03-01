@@ -16,7 +16,7 @@ from game.food import Food
 MAP_SIZE = 400 
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
 GRID_CELL_SIZE = 20
-TIME_DELAY = 60
+TIME_DELAY = 120
 BODY_LENGTH = 4
 
 # set up the colors

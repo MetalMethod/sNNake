@@ -5,6 +5,7 @@ from game.game import Game
 from sensors import Sensors
 from random import randint
 
+
 #constants
 GAMES_COUNT = 3
 
@@ -15,7 +16,7 @@ observation = []
 class Brain:
     def __init__(self):
         self.game = Game(GAMES_COUNT)
-        self.main_loop()
+        self.main_loop()     
 
     def generate_action(self):
         return randint(-1,1)
@@ -26,12 +27,37 @@ class Brain:
         if(self.game.player.food): reward = 1
         return reward
 
+    def init_distance(self):
+        self.previous_distance_x = 0
+        self.previous_distance_y = 0
+
+    def get_food_distance(self):
+        distance_x = (self.game.player.position[0] - self.game.food.position[0]) 
+        distance_y = self.game.player.position[1] - self.game.food.position[1]
+
+        if(distance_x < 0): distance_x = distance_x * -1
+        if(distance_y < 0): distance_y = distance_y * -1
+
+        result = -1
+
+        if(distance_x < self.previous_distance_y or distance_y < self.previous_distance_y):
+            result = 1
+        
+        print(result)        
+        self.previous_distance_x = distance_x
+        self.previous_distance_y = distance_y
+        return result
+
+
+
     # main_loop is a pool of games for training
     def main_loop(self):
         while (self.game.count <= self.game.max_games):
             #reseting game
             self.game.reset()
             
+            self.init_distance()
+
             self.sensors = Sensors(self.game.grid, self.game.player)    
 
             # game loop
@@ -41,12 +67,12 @@ class Brain:
                 action = self.generate_action()
                 action = 0
                 self.game.step(self.sensors, action)
-
-                #evaluate reward
-                reward = self.get_reward()
+##########
+                self.get_food_distance()
+##########
                 # get observation
-                observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), action, reward]
-                print(observation)
+                observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), action, self.get_reward()]
+                #print(observation)
 
             #end of game loop
             self.game.count = self.game.count + 1
