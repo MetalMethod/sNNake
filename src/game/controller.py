@@ -15,24 +15,31 @@ class Controller:
             #turn left
             if(self.player.direction == 1):
                 self.left()
+                return
             if(self.player.direction == 2):
                 self.up()
+                return
             if(self.player.direction == 3):
                 self.right()
+                return
             if(self.player.direction == 4):
                 self.down()
+                return
             return
         if(action == 1):
             #turn right
             if(self.player.direction == 1):
                 self.right()
+                return
             if(self.player.direction == 2):
                 self.down()
+                return
             if(self.player.direction == 3):
                 self.left()
+                return
             if(self.player.direction == 4):
                 self.up()
-            return
+                return
         if(action == 0):
             return
     
@@ -49,7 +56,7 @@ class Controller:
             self.player.eat()
     
     def up(self):
-        if (self.player.direction != 3) : self.player.direction = 1
+        if (self.player.direction != 3): self.player.direction = 1
 
     def right(self):
         if (self.player.direction != 4) : self.player.direction = 2
@@ -65,4 +72,6 @@ class Controller:
         # print("##########################")
         # for el in self.player.body_list:
         #     print (el.position.get_position())
+       
+        # print("dir   ", self.player.direction)
         return

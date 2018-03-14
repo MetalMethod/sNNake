@@ -43,7 +43,8 @@ class Brain:
         if(distance_x < self.previous_distance_y or distance_y < self.previous_distance_y):
             result = 1
         
-        print(result)        
+        #print(result)        
+        
         self.previous_distance_x = distance_x
         self.previous_distance_y = distance_y
         return result
@@ -65,10 +66,11 @@ class Brain:
 
                 # give input to game
                 action = self.generate_action()
-                action = 0
+                #action = 0
                 self.game.step(self.sensors, action)
 ##########
                 self.get_food_distance()
+                print(self.get_food_distance())
 ##########
                 # get observation
                 observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), action, self.get_reward()]

@@ -20,11 +20,9 @@ class Sensors:
             return False
 
     def detect_body(self, position_array):
-        result = False
-        for i in range (3, len(self.player.body_list)):
+        for i in range (1, len(self.player.body_list)):
             if(position_array[0] == self.player.body_list[i].position[0] and position_array[1] == self.player.body_list[i].position[1]):
-                result = True
-        return result
+                return True
 
     def obstacle_forward(self):
         position_ahead = []
@@ -86,3 +84,4 @@ class Sensors:
             return 1
         return 0
     
+

@@ -16,7 +16,7 @@ from game.food import Food
 MAP_SIZE = 400 
 WINDOW_SIZE = width, height = MAP_SIZE, MAP_SIZE
 GRID_CELL_SIZE = 20
-TIME_DELAY = 120
+TIME_DELAY = 100
 BODY_LENGTH = 4
 
 # set up the colors
@@ -69,7 +69,7 @@ class Game:
     def check_isAlive(self, sensors):
         if(sensors.detect_walls(self.grid, self.player.position)): 
             self.player.alive = False
-            self.player.position = [10,10]
+            #self.player.position = [10,10]
             #print("WALL HIT")
         
         if(sensors.detect_body(self.player.position)): 

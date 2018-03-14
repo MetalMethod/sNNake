@@ -10,7 +10,8 @@ class Player:
         self.food = False
         self.direction = self.initial_direction()
         self.body_list = []
-        self.insert_body(BODY_LENGTH)
+        #self.insert_body(BODY_LENGTH)
+        self.insert_body(1)
     
     def initial_direction(self):
         return randint(1, 4)
