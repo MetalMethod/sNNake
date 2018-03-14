@@ -39,16 +39,17 @@ class Brain:
         if(distance_y < 0): distance_y = distance_y * -1
 
         result = -1
-
-        if(distance_x < self.previous_distance_y or distance_y < self.previous_distance_y):
+                
+        if(distance_x < self.previous_distance_x):
             result = 1
-        
-        #print(result)        
-        
+
+        if(distance_y < self.previous_distance_y):
+            result = 1
+         
         self.previous_distance_x = distance_x
         self.previous_distance_y = distance_y
+        print("   ", result)
         return result
-
 
 
     # main_loop is a pool of games for training
@@ -73,7 +74,8 @@ class Brain:
                 print(self.get_food_distance())
 ##########
                 # get observation
-                observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), action, self.get_reward()]
+                observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), self.get_food_distance(), action, self.get_reward()]
+                #print("forward ",self.sensors.obstacle_forward(), "    left ", self.sensors.obstacle_left(),"    right ", self.sensors.obstacle_right(), "    food ", self.get_food_distance(), "    action ", action, "   reward ", self.get_reward())
                 #print(observation)
 
             #end of game loop
