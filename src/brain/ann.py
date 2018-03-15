@@ -59,7 +59,7 @@ class Network:
         #Fitting the ANN to traningset
         #X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size = 0.2, )    
     def train(self, observation_array):
-        print("yo training bitch")
+        print("training")
         self.X = observation_array.iloc[:, 0:5].values
         self.classifier.fit(self.X , self.y, batch_size = 1, epochs = 10)
 
