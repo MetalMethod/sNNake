@@ -4,14 +4,16 @@ sys.path.append('../')
 from game.game import Game
 from sensors import Sensors
 from random import randint
-
+from ann import Network
 
 #constants
-GAMES_COUNT = 3
+GAMES_COUNT = 10
 
 #globals
 input = 0
 observation = []
+#Import ANN
+artificial_neural_network = Network()
 
 class Brain:
     def __init__(self):
@@ -69,15 +71,17 @@ class Brain:
                 action = self.generate_action()
                 #action = 0
                 self.game.step(self.sensors, action)
-##########
-                #self.get_food_distance()
-                #print(self.get_food_distance())
-##########
+
                 # get observation
                 observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), self.get_food_distance(), action, self.get_reward()]
-                #print("forward ",self.sensors.obstacle_forward(), "    left ", self.sensors.obstacle_left(),"    right ", self.sensors.obstacle_right(), "    food ", self.get_food_distance(), "    action ", action, "   reward ", self.get_reward())
-                print("forward ", "    left ", "    right ", "    food ",  "    action ", "   reward ")
-                print(observation)
+                
+                ##ANN
+                #artificial_neural_network.train(observation)
+    
+                
+
+                # print("forward ", "    left ", "    right ", "    food ",  "    action ", "   reward ")
+                # print(observation)
 
             #end of game loop
             self.game.count = self.game.count + 1
