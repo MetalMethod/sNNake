@@ -48,9 +48,9 @@ class Network:
 
     def init_network(self):        
         self.classifier = Sequential()
-        self.classifier.add(Dense(activation = 'relu', input_dim = 6, units = 6, kernel_initializer ='uniform' ))
+        self.classifier.add(Dense(activation = 'relu', input_dim = 5, units = 5, kernel_initializer ='uniform' ))
         #Add second hidden layer
-        self.classifier.add(Dense(activation = 'relu', units = 6, kernel_initializer ='uniform', ))
+        self.classifier.add(Dense(activation = 'relu', units = 5, kernel_initializer ='uniform', ))
         #Add the output layer
         self.classifier.add(Dense(activation = 'sigmoid', units = 1, kernel_initializer ='uniform', ))
         self.classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'] )
@@ -59,9 +59,15 @@ class Network:
         #Fitting the ANN to traningset
         #X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size = 0.2, )    
     def train(self, observation_array):
-        print("training")
-        self.X = observation_array.iloc[:, 0:5].values
-        self.classifier.fit(self.X , self.y, batch_size = 1, epochs = 10)
+        #print("training")
+        # self.X = observation_array[0:5]
+        # self.y = observation_array[-1]
+        self.X = np.array(observation_array[:5]).reshape(5)
+        self.y = np.array(observation_array[5]).reshape(1)
+        #print (self.X, "         ", self.y)
+        print (self.X.shape)
+            
+        #self.classifier.fit(self.X , self.y, batch_size = 1, epochs = 1)
 
         
         #PREDICTION

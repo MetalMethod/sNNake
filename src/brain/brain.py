@@ -5,6 +5,7 @@ from game.game import Game
 from sensors import Sensors
 from random import randint
 from ann import Network
+import pickle
 
 #constants
 GAMES_COUNT = 10
@@ -12,12 +13,14 @@ GAMES_COUNT = 10
 #globals
 input = 0
 observation = []
+training_data = []
 #Import ANN
 artificial_neural_network = Network()
 
 class Brain:
     def __init__(self):
         self.game = Game(GAMES_COUNT)
+        #self.train()
         self.main_loop()     
 
     def generate_action(self):
@@ -53,6 +56,21 @@ class Brain:
 #        print("   ", result)
         return result
 
+    def save_training_data(self, data, filename):
+        with open(filename, 'wb') as output:  # Overwrites any existing file.
+            pickle.dump(data, output, pickle.HIGHEST_PROTOCOL)
+
+
+    def train(self):
+        tr = []
+        with open('training_data.pkl', 'rb') as input:
+            data = pickle.load(input)
+            tr.append(data)
+
+        for item in data:
+            print(item)
+            #artificial_neural_network.train(item)
+
 
     # main_loop is a pool of games for training
     def main_loop(self):
@@ -73,18 +91,23 @@ class Brain:
                 self.game.step(self.sensors, action)
 
                 # get observation
-                observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), self.get_food_distance(), action, self.get_reward()]
-                
+                observation = [self.sensors.obstacle_forward(), self.sensors.obstacle_left(), self.sensors.obstacle_right(), self.get_food_distance(), self.get_reward(), action]
+                #training_data.append(observation)
                 ##ANN
-                #artificial_neural_network.train(observation)
-    
+                artificial_neural_network.train(observation)
                 
+
 
                 # print("forward ", "    left ", "    right ", "    food ",  "    action ", "   reward ")
                 # print(observation)
+                #print(training_data)
 
             #end of game loop
             self.game.count = self.game.count + 1
+            
+            # if(self.game.count == self.game.max_games -1):
+            #     self.save_training_data(observation, 'training_data.pkl')
+        
 
 if __name__ == "__main__":
     b = Brain()
