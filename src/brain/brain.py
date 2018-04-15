@@ -61,15 +61,14 @@ class Brain:
             pickle.dump(data, output, pickle.HIGHEST_PROTOCOL)
 
 
-    def train(self):
-        tr = []
-        with open('training_data.pkl', 'rb') as input:
-            data = pickle.load(input)
-            tr.append(data)
-
-        for item in data:
-            print(item)
-            #artificial_neural_network.train(item)
+    # def train(self):
+    #     tr = []
+    #     with open('training_data.pkl', 'rb') as input:
+    #         data = pickle.load(input)
+    #         tr.append(data)
+        # for item in data:
+        #     print(item)
+        #     artificial_neural_network.train(item)
 
 
     # main_loop is a pool of games for training

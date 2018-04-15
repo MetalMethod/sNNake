@@ -65,9 +65,8 @@ class Network:
         self.X = np.array(observation_array[:5]).reshape(5)
         self.y = np.array(observation_array[5]).reshape(1)
         #print (self.X, "         ", self.y)
-        print (self.X.shape)
-            
-        #self.classifier.fit(self.X , self.y, batch_size = 1, epochs = 1)
+        #print (self.X.shape)
+        self.classifier.fit(self.X , self.y, batch_size = 1, epochs = 1)
 
         
         #PREDICTION
